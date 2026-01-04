@@ -1,0 +1,287 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  min-height: 100vh;
+}
+
+/* AUTH CARD */
+.auth-card {
+  width: 350px;
+  margin: 80px auto;
+  padding: 25px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  color: white;
+}
+
+.auth-card h2 {
+  margin-bottom: 15px;
+}
+
+.auth-card input {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 6px;
+}
+
+.auth-card button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  background: #00e676;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* DASHBOARD */
+.dashboard {
+  display: flex;
+  height: 100vh;
+  color: white;
+}
+
+.sidebar {
+  width: 220px;
+  background: rgba(0, 0, 0, 0.25);
+  padding: 20px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  margin: 15px 0;
+  cursor: pointer;
+}
+
+.logout-btn {
+  margin-top: 30px;
+  padding: 8px;
+  width: 100%;
+  background: crimson;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.main-content {
+  flex: 1;
+  padding: 40px;
+}
+table {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid white;
+  padding: 8px;
+}
+
+input {
+  display: block;
+  margin: 8px 0;
+  padding: 8px;
+}
+
+.main-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* TOP BAR */
+.topbar {
+  height: 60px;
+  background: rgba(0,0,0,0.25);
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  color: white;
+}
+
+.topbar-left {
+  flex: 1;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.topbar-center {
+  flex: 1;
+  text-align: center;
+  font-size: 18px;
+}
+
+.topbar-right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 15px;
+}
+
+.profile {
+  text-align: right;
+  font-size: 14px;
+}
+
+.profile span {
+  display: block;
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.topbar-right button {
+  background: crimson;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+}
+.card {
+  background: rgba(255,255,255,0.15);
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.card h2 {
+  margin-bottom: 10px;
+}
+
+.card button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background: #00e676;
+  font-weight: bold;
+}
+
+/* PAGE CONTENT */
+.page-content {
+  padding: 20px;
+}
+.bill-actions {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+/* Moving Warning Text */
+.bill-warning {
+  position: fixed;
+  bottom: 35px;
+  right: 450px;
+  font-size: 15px;
+  font-weight: bold;
+  color: #ffeb3b;
+  animation: blinkMove 1.5s infinite;
+  white-space: nowrap;
+}
+
+/* Animation */
+@keyframes blinkMove {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  50% {
+    opacity: 0.4;
+    transform: translateX(-5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Buttons */
+.thermal-btn {
+  background: #ffd600;
+  color: #000;
+  padding: 14px 22px;
+  font-size: 15px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.generate-btn {
+  background: #00e676;
+  color: #000;
+  padding: 14px 22px;
+  font-size: 15px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.generate-btn:hover,
+.thermal-btn:hover {
+  transform: scale(1.05);
+}
+/* SIDEBAR */
+.sidebar {
+  width: 220px;
+  background: linear-gradient(180deg, #3f51b5, #5e35b1);
+  color: white;
+  padding: 20px;
+}
+
+.sidebar h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 22px;
+}
+
+/* MENU LIST */
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+/* MENU ITEM */
+.sidebar ul li {
+  padding: 12px 15px;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+/* HOVER EFFECT */
+.sidebar ul li:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateX(5px);
+}
+
+/* ACTIVE PAGE */
+.sidebar ul li.active {
+  background: #00e676;
+  color: #000;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}

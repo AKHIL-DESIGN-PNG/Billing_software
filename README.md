@@ -83,7 +83,7 @@ Owners can manage items, generate bills, track stock,  — all from a clean dash
 ### 1️⃣ Clone Repository
 
 ```bash
-git clone https://github.com/AKHIL-DESIGN-PNG/Billing_software
+git clone [https://github.com/AKHIL-DESIGN-PNG/Billing_software](https://github.com/AKHIL-DESIGN-PNG/Billing_software.git)
 cd Billing_software
 ```
 

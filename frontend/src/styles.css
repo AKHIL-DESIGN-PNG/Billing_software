@@ -1,24 +1,57 @@
+/* ===============================
+   GLOBAL RESET & THEME VARIABLES
+================================ */
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-body {
-  font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  min-height: 100vh;
+:root {
+  --bg-gradient: linear-gradient(135deg, #667eea, #764ba2);
+  --card-bg: rgba(255, 255, 255, 0.15);
+  --sidebar-bg: linear-gradient(180deg, #3f51b5, #5e35b1);
+  --topbar-bg: rgba(0, 0, 0, 0.25);
+  --text-color: #ffffff;
+  --accent: #00e676;
+  --border-color: rgba(255,255,255,0.3);
 }
 
-/* AUTH CARD */
+/* LIGHT MODE */
+body.light {
+  --bg-gradient: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+  --card-bg: #ffffff;
+  --sidebar-bg: linear-gradient(180deg, #ffffff, #f1f1f1);
+  --topbar-bg: #ffffff;
+  --text-color: #222222;
+  --accent: #3f51b5;
+  --border-color: #ddd;
+}
+
+/* ===============================
+   BODY
+================================ */
+
+body {
+  font-family: Arial, sans-serif;
+  background: var(--bg-gradient);
+  min-height: 100vh;
+  color: var(--text-color);
+  transition: background 0.3s ease;
+}
+
+/* ===============================
+   AUTH (LOGIN / REGISTER)
+================================ */
+
 .auth-card {
   width: 350px;
   margin: 80px auto;
   padding: 25px;
-  background: rgba(255, 255, 255, 0.15);
+  background: var(--card-bg);
   backdrop-filter: blur(10px);
   border-radius: 12px;
-  color: white;
 }
 
 .auth-card h2 {
@@ -37,82 +70,85 @@ body {
   width: 100%;
   padding: 10px;
   margin-top: 10px;
-  background: #00e676;
+  background: var(--accent);
   border: none;
   border-radius: 6px;
   font-weight: bold;
   cursor: pointer;
 }
 
-/* DASHBOARD */
+/* ===============================
+   DASHBOARD LAYOUT
+================================ */
+
 .dashboard {
   display: flex;
   height: 100vh;
-  color: white;
 }
+
+/* ===============================
+   SIDEBAR (STATIC)
+================================ */
 
 .sidebar {
   width: 220px;
-  background: rgba(0, 0, 0, 0.25);
+  background: var(--sidebar-bg);
   padding: 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+}
+
+.sidebar h2 {
+  text-align: center;
+  margin-bottom: 25px;
 }
 
 .sidebar ul {
   list-style: none;
-  padding: 0;
 }
 
-.sidebar li {
-  margin: 15px 0;
+.sidebar ul li {
+  padding: 12px 15px;
+  margin-bottom: 8px;
+  border-radius: 8px;
   cursor: pointer;
+  transition: 0.3s;
 }
 
-.logout-btn {
-  margin-top: 30px;
-  padding: 8px;
-  width: 100%;
-  background: crimson;
-  border: none;
-  color: white;
-  border-radius: 6px;
-  cursor: pointer;
+.sidebar ul li:hover {
+  background: rgba(255,255,255,0.15);
+  transform: translateX(5px);
 }
 
-.main-content {
-  flex: 1;
-  padding: 40px;
-}
-table {
-  width: 100%;
-  margin-top: 20px;
-  border-collapse: collapse;
+.sidebar ul li.active {
+  background: var(--accent);
+  color: #000;
+  font-weight: bold;
 }
 
-th, td {
-  border: 1px solid white;
-  padding: 8px;
-}
-
-input {
-  display: block;
-  margin: 8px 0;
-  padding: 8px;
-}
+/* ===============================
+   MAIN AREA
+================================ */
 
 .main-area {
+  margin-left: 220px;
   flex: 1;
   display: flex;
   flex-direction: column;
 }
 
-/* TOP BAR */
+/* ===============================
+   TOP BAR
+================================ */
+
 .topbar {
   height: 60px;
-  background: rgba(0,0,0,0.25);
+  background: var(--topbar-bg);
   display: flex;
   align-items: center;
   padding: 0 20px;
-  color: white;
 }
 
 .topbar-left {
@@ -124,38 +160,42 @@ input {
 .topbar-center {
   flex: 1;
   text-align: center;
-  font-size: 18px;
 }
 
 .topbar-right {
   flex: 1;
   display: flex;
   justify-content: flex-end;
-  align-items: center;
-  gap: 15px;
-}
-
-.profile {
-  text-align: right;
-  font-size: 14px;
-}
-
-.profile span {
-  display: block;
-  font-size: 12px;
-  opacity: 0.8;
+  gap: 12px;
 }
 
 .topbar-right button {
-  background: crimson;
-  border: none;
   padding: 6px 12px;
-  border-radius: 5px;
-  color: white;
+  border-radius: 6px;
+  border: none;
   cursor: pointer;
 }
+
+.logout-btn {
+  background: crimson;
+  color: white;
+}
+
+/* ===============================
+   PAGE CONTENT
+================================ */
+
+.page-content {
+  padding: 20px;
+  overflow-y: auto;
+}
+
+/* ===============================
+   CARDS
+================================ */
+
 .card {
-  background: rgba(255,255,255,0.15);
+  background: var(--card-bg);
   padding: 20px;
   border-radius: 10px;
   margin-bottom: 20px;
@@ -166,122 +206,175 @@ input {
 }
 
 .card button {
-  padding: 10px 15px;
+  background: var(--accent);
   border: none;
+  padding: 10px 16px;
   border-radius: 6px;
   cursor: pointer;
-  background: #00e676;
   font-weight: bold;
 }
 
-/* PAGE CONTENT */
-.page-content {
-  padding: 20px;
+/* ===============================
+   TABLES
+================================ */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
 }
+
+th, td {
+  border: 1px solid var(--border-color);
+  padding: 10px;
+}
+
+thead {
+  background: rgba(0,0,0,0.2);
+}
+
+/* SCROLLABLE TABLE */
+.table-container {
+  max-height: 300px;
+  overflow-y: auto;
+  border-radius: 6px;
+}
+
+.table-container thead {
+  position: sticky;
+  top: 0;
+}
+
+/* ===============================
+   BILLING ACTIONS
+================================ */
+
 .bill-actions {
   position: fixed;
   bottom: 30px;
   right: 30px;
   display: flex;
   gap: 15px;
-  align-items: center;
-}
-
-/* Moving Warning Text */
-.bill-warning {
-  position: fixed;
-  bottom: 35px;
-  right: 450px;
-  font-size: 15px;
-  font-weight: bold;
-  color: #ffeb3b;
-  animation: blinkMove 1.5s infinite;
-  white-space: nowrap;
-}
-
-/* Animation */
-@keyframes blinkMove {
-  0% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-  50% {
-    opacity: 0.4;
-    transform: translateX(-5px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-/* Buttons */
-.thermal-btn {
-  background: #ffd600;
-  color: #000;
-  padding: 14px 22px;
-  font-size: 15px;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
-  font-weight: bold;
 }
 
 .generate-btn {
   background: #00e676;
-  color: #000;
   padding: 14px 22px;
-  font-size: 15px;
   border-radius: 8px;
+  font-weight: bold;
   border: none;
   cursor: pointer;
-  font-weight: bold;
 }
 
-.generate-btn:hover,
-.thermal-btn:hover {
+.thermal-btn {
+  background: #ffd600;
+  padding: 14px 22px;
+  border-radius: 8px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+}
+
+/* ===============================
+   WARNING TEXT
+================================ */
+
+.bill-warning {
+  position: fixed;
+  bottom: 35px;
+  right: 420px;
+  font-weight: bold;
+  color: #ffeb3b;
+  animation: blinkMove 1.5s infinite;
+}
+
+@keyframes blinkMove {
+  0% { opacity: 1; }
+  50% { opacity: 0.4; }
+  100% { opacity: 1; }
+}
+
+/* ===============================
+   FORMS
+================================ */
+
+input {
+  padding: 8px;
+  border-radius: 6px;
+  border: none;
+}
+
+.item-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.item-form input {
+  width: 180px;
+}
+
+.item-form button {
+  padding: 8px 16px;
+}
+
+/* ===============================
+   UTILITIES
+================================ */
+
+button:hover {
   transform: scale(1.05);
 }
 /* SIDEBAR */
 .sidebar {
   width: 220px;
+  height: 100vh;
   background: linear-gradient(180deg, #3f51b5, #5e35b1);
   color: white;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
 }
 
-.sidebar h2 {
-  text-align: center;
-  margin-bottom: 25px;
-  font-size: 22px;
-}
-
-/* MENU LIST */
-.sidebar ul {
+/* MENU */
+.menu {
   list-style: none;
   padding: 0;
 }
 
-/* MENU ITEM */
-.sidebar ul li {
+.menu li {
   padding: 12px 15px;
   margin-bottom: 8px;
   border-radius: 8px;
   cursor: pointer;
-  font-size: 16px;
   transition: all 0.3s ease;
 }
 
-/* HOVER EFFECT */
-.sidebar ul li:hover {
+.menu li:hover {
   background: rgba(255, 255, 255, 0.15);
   transform: translateX(5px);
 }
 
-/* ACTIVE PAGE */
-.sidebar ul li.active {
+.menu li.active {
   background: #00e676;
   color: #000;
   font-weight: bold;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* 👇 FOOTER AREA (IMAGE + VERSION) */
+.sidebar-footer {
+  margin-top: auto;        /* pushes to bottom */
+  text-align: center;
+  opacity: 0.9;
+}
+
+.sidebar-image {
+  width: 100%;
+  max-height: 160px;
+  object-fit: contain;
+  margin-bottom: 10px;
+}
+
+.version {
+  font-size: 12px;
+  opacity: 0.7;
 }

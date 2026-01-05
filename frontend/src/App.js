@@ -13,6 +13,7 @@ function PrivateRoute({ children }) {
 
 export default function App() {
   const token = localStorage.getItem("token");
+  
 
   return (
     <Router>
@@ -23,7 +24,7 @@ export default function App() {
           element={token ? <Navigate to="/dashboard" /> : <Login />}
         />
         <Route path="/register" element={<Register />} />
-
+      
         {/* PRIVATE DASHBOARD LAYOUT */}
         <Route
           path="/"
@@ -36,9 +37,10 @@ export default function App() {
           <Route path="dashboard" element={<p>Manage your shop billing here</p>} />
           <Route path="items" element={<Items />} />
           <Route path="billing" element={<Billing />} />
-          <Route path="reports" element={<p>Reports coming soon</p>} />
+    
         </Route>
       </Routes>
     </Router>
+    
   );
 }

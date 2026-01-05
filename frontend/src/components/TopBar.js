@@ -8,7 +8,7 @@ export default function TopBar({ title }) {
     <div className="topbar">
       {/* LEFT */}
       <div className="topbar-left">
-        Billing App
+        <button className="menu-btn">☰</button>
       </div>
 
       {/* CENTER */}

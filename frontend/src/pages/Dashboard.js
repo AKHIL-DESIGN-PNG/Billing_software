@@ -35,7 +35,6 @@ export default function Dashboard() {
           <li onClick={() => setActivePage("Dashboard")}>Dashboard</li>
           <li onClick={() => setActivePage("Items")}>Items</li>
           <li onClick={() => setActivePage("Billing")}>Billing</li>
-          <li onClick={() => setActivePage("Reports")}>Reports</li>
         </ul>
       </aside>
 
@@ -96,11 +95,6 @@ export default function Dashboard() {
 
           {/* BILLING PAGE */}
           {activePage === "Billing" && <Billing />}
-
-          {/* REPORTS */}
-          {activePage === "Reports" && (
-            <p>Reports coming soon</p>
-          )}
         </div>
       </div>
     </div>

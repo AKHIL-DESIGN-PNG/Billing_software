@@ -3,6 +3,7 @@ import api from "../services/api";
 
 export default function Items() {
   const [items, setItems] = useState([]);
+  const [search, setSearch] = useState("");
   const [form, setForm] = useState({
     name: "",
     price: "",
@@ -25,66 +26,103 @@ export default function Items() {
     setForm({ name: "", price: "", quantity: "", category: "" });
     fetchItems();
   };
-  
+
 
   useEffect(() => {
     fetchItems();
   }, []);
 
-  return (
-    <>
-      <h2>Add Item</h2>
+  // 🔍 SEARCH FILTER
+  const filteredItems = items
+    .filter(i =>
+      i.name.toLowerCase().includes(search.toLowerCase())
+    )
+    .slice(0, 10); // ✅ ONLY 10 ITEMS SHOWN
 
+  return (    
+    <div className="page-content">
+  <div className="card add-item-card">
+  <h2>📦 Add Item</h2>
+
+  <div className="add-item-row">
+    <input
+      className="form-input"
+      placeholder="Item Name"
+      value={form.name}
+      onChange={(e) => setForm({ ...form, name: e.target.value })}
+    />
+
+    <input
+      className="form-input"
+      type="number"
+      placeholder="Price"
+      value={form.price}
+      onChange={(e) => setForm({ ...form, price: e.target.value })}
+    />
+
+    <input
+      className="form-input"
+      type="number"
+      placeholder="Quantity"
+      value={form.quantity}
+      onChange={(e) => setForm({ ...form, quantity: e.target.value })}
+    />
+
+    <input
+      className="form-input"
+      placeholder="Category"
+      value={form.category}
+      onChange={(e) => setForm({ ...form, category: e.target.value })}
+    />
+
+    <button className="primary-btn add-btn" onClick={addItem}>
+      ➕ Add
+    </button>
+  </div>
+</div>
+
+
+      <h2 style={{ marginTop: "30px" }}>📋 Items List</h2>
+
+      {/* 🔍 SEARCH BAR */}
       <input
-        placeholder="Item Name"
-        value={form.name}
-        onChange={(e) => setForm({ ...form, name: e.target.value })}
+        placeholder="Search item..."
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        style={{ marginBottom: "10px", width: "250px" }}
       />
 
-      <input
-        placeholder="Price"
-        type="number"
-        value={form.price}
-        onChange={(e) => setForm({ ...form, price: e.target.value })}
-      />
-
-      <input
-        placeholder="Quantity"
-        type="number"
-        value={form.quantity}
-        onChange={(e) => setForm({ ...form, quantity: e.target.value })}
-      />
-
-      <input
-        placeholder="Category"
-        value={form.category}
-        onChange={(e) => setForm({ ...form, category: e.target.value })}
-      />
-
-      <button onClick={addItem}>Add Item</button>
-
-      <h2>Items List</h2>
-
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Qty</th>
-            <th>Category</th>
-          </tr>
-        </thead>
-        <tbody>
-          {items.map((i) => (
-            <tr key={i._id}>
-              <td>{i.name}</td>
-              <td>{i.price}</td>
-              <td>{i.quantity}</td>
-              <td>{i.category}</td>
+      {/* 📊 TABLE WITH SCROLL */}
+      <div className="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Qty</th>
+              <th>Category</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-    </>
+          </thead>
+          <tbody>
+            {filteredItems.length === 0 ? (
+              <tr>
+                <td colSpan="4" style={{ textAlign: "center" }}>
+                  No items found
+                </td>
+              </tr>
+            ) : (
+              filteredItems.map((i) => (
+                <tr key={i._id}>
+                  <td>{i.name}</td>
+                  <td>₹{i.price}</td>
+                  <td>{i.quantity}</td>
+                  <td>{i.category}</td>
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
+      </div>
+    </div>
   );
 }

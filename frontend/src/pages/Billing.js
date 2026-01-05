@@ -9,6 +9,7 @@ export default function Billing() {
 
     const [editingIndex, setEditingIndex] = useState(null);
     const [editForm, setEditForm] = useState({ price: "", qty: "" });
+    const [showAvailable, setShowAvailable] = useState(true);
 
     /* ================= FETCH ITEMS ================= */
 
@@ -157,30 +158,76 @@ export default function Billing() {
                 onChange={(e) => searchItems(e.target.value)}
             />
 
-            {/* AVAILABLE ITEMS */}
-            <h3>Available Items</h3>
-            {suggestedItems.map((item) => (
-                <div key={item._id} style={{ marginBottom: "10px" }}>
-                    <strong>{item.name}</strong> | ₹{item.price} | Stock: {item.quantity}
+            {/* AVAILABLE ITsEMS */}
+            <div
+                style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    cursor: "pointer",
+                    marginTop: "10px"
+                }}
+                onClick={() => setShowAvailable(!showAvailable)}
+            >
+                <h3 style={{ margin: 0 }}>___________________Available Items_____________  </h3>
 
-                    <input
-                        type="number"
-                        placeholder="Qty"
-                        value={qtyMap[item._id] || ""}
-                        onChange={(e) =>
-                            setQtyMap({ ...qtyMap, [item._id]: e.target.value })
-                        }
-                        style={{ marginLeft: "10px", width: "60px" }}
-                    />
+                <span style={{ fontSize: "60px" }}>
+                    {showAvailable ? "-" : "+"}
+                </span>
+            </div>
 
-                    <button
-                        style={{ marginLeft: "10px" }}
-                        onClick={() => addToBill(item)}
-                    >
-                        Add
-                    </button>
+            {showAvailable && (
+                <div className="table-container" style={{ marginTop: "8px" }}>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>Stock</th>
+                                <th>Qty</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {suggestedItems.map((item) => (
+                                <tr key={item._id}>
+                                    <td><strong>{item.name}</strong></td>
+                                    <td>₹{item.price}</td>
+
+                                    <td style={{ color: item.quantity === 0 ? "#ff4d4d" : "#fff" }}>
+                                        {item.quantity}
+                                    </td>
+
+                                    <td>
+                                        <input
+                                            type="number"
+                                            placeholder="Qty"
+                                            value={qtyMap[item._id] || ""}
+                                            onChange={(e) =>
+                                                setQtyMap({ ...qtyMap, [item._id]: e.target.value })
+                                            }
+                                            style={{ width: "60px" }}
+                                            disabled={item.quantity === 0}
+                                        />
+                                    </td>
+
+                                    <td>
+                                        <button
+                                            onClick={() => addToBill(item)}
+                                            disabled={item.quantity === 0}
+                                        >
+                                            Add
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
                 </div>
-            ))}
+            )}
+
+
 
             {/* BILL TABLE */}
             <h3>Bill Items</h3>
